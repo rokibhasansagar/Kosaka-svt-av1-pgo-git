@@ -1,0 +1,16 @@
+video-input/
+video-input/video-input
+pkg
+src
+SVT-AV1
+svt-av1-psy
+*.pkg.tar.zst
+*.tar.gz
+*.old
+*.log
+*.mkv
+*.mp4
+*.y4m
+svt-av1-psy
+logpipe.*
+old
