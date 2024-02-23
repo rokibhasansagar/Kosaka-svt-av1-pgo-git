@@ -7,8 +7,8 @@
 
 pkgname=svt-av1-psy-pgo
 #official svt-av1 version
-_pkgver=1.8.0
-pkgver=1.8.0.r3574.a980885
+pkgver=v1.9.0.rc1.r0.ge0b96d4
+_pkgver=1.9.0
 pkgrel=1
 pkgdesc='Scalable Video Technology AV1 encoder and decoder'
 arch=(x86_64)
@@ -50,7 +50,7 @@ BOLT=true
 #  - objective-2-fast: roughly 4.5 gigabytes uncompressed.
 #  - objective-2-slow: roughly 21 gigabytes uncompressed.
 #  - none: No video will be downloaded. You have to provide your own.
-DOWNLOAD_OBJECTIVE_TYPE="none"
+DOWNLOAD_OBJECTIVE_TYPE="objective-1-fast"
 
 #*END OF OPTIONS
 
@@ -99,13 +99,8 @@ prepare() {
 
 
 pkgver() {
-  #new repo doesn't have any git tags.
-  # git -C svt-av1-psy describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//'
   cd "$_repo" || exit 1
-  ( set -o pipefail
-    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-    printf "${_pkgver}.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD | sed 's/\([^-]*\)-g.*/r\1/;s/-/./g')"
-  )
+  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
