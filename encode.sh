@@ -32,8 +32,8 @@ if test "$DOWNLOAD_OBJECTIVE_TYPE" == "none"; then
     fi
 elif test "$DOWNLOAD_OBJECTIVE_TYPE" == "objective-3-fast"; then
     mkdir -p "$PWD"/objective-3-fast
-    rm objective-*-fast/*640x360* objective-*-fast/*360p* objective-*-fast/*240p*
-    mv objective-*-fast/*.y4m objective-3-fast/ && rm -rf objective-[12]-fast
+    rm objective-*/*640x360* objective-*/*360p* objective-*/*240p*
+    mv -f objective-*/*.y4m objective-3-fast/ && rm -rf objective-[12]-fast
 fi
 
 export av1an_opts=(
@@ -82,7 +82,8 @@ filecount=$(wc -l < "$PWD"/filelist.txt)
 echo "[i] There are total ${filecount} media files present"
 cat "$PWD"/filelist.txt && echo
 
-for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
+cat "$PWD"/filelist.txt | while read -r file; do
+# for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     echo ""
     basename="${file##*/}"
     #Add our new svt-av1 binary to the $PATH because you're unable to tell Av1an what binary to use.
