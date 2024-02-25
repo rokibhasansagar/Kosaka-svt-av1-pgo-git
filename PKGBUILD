@@ -1,3 +1,4 @@
+#!/hint/bash
 # Maintainer : Kosaka <kosaka@noreply.codeberg.org>
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
 # Contributor: Daniel Bermond <dbermond@archlinux.org>
@@ -27,6 +28,7 @@ makedepends=(
   llvm
   llvm-bolt
   clang
+  libdovi
   av1an
 )
 source=('git+https://github.com/gianni-rosato/svt-av1-psy'
