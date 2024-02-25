@@ -18,7 +18,10 @@ license=(
   BSD
   'custom: Alliance for Open Media Patent License 1.0'
 )
-depends=(glibc)
+depends=(
+  glibc
+  libdovi
+)
 makedepends=(
   cmake
   git
@@ -27,7 +30,6 @@ makedepends=(
   llvm
   llvm-bolt
   clang
-  libdovi
   av1an
   tar
   zstd
@@ -129,6 +131,7 @@ build() {
     -DSVT_AV1_PGO_DIR="${srcdir}"/svt-pgo-data \
     -DCMAKE_BUILD_TYPE=Release \
     -DSVT_AV1_LTO=ON \
+    -DLIBDOVI_FOUND=1 \
     -DNATIVE=OFF
   ninja PGOCompileGen -C build
 
