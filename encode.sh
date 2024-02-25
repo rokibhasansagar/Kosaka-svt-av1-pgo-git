@@ -41,9 +41,10 @@ export av1an_opts=(
     --verbose
     --split-method av-scenechange
     --sc-method standard
-    --pix-format yuv420p10le
     --sc-pix-format yuv420p
     --sc-downscale-height 540
+    --chunk-method lsmash
+    --pix-format yuv420p10le
 )
 
 svt_encode() {
@@ -123,6 +124,9 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
         move_profraw
         move_fdata
     fi
+
+    #cleanup
+    rm *.av1an
 done
 
 exit 0
