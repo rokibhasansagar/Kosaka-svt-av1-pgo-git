@@ -1,4 +1,3 @@
-#!/hint/bash
 # Maintainer : Kosaka <kosaka@noreply.codeberg.org>
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
 # Contributor: Daniel Bermond <dbermond@archlinux.org>
@@ -50,8 +49,9 @@ BOLT=true
 #  - objective-1: roughly 26-27 gigabytes uncompressed.
 #  - objective-2-fast: roughly 4.5 gigabytes uncompressed.
 #  - objective-2-slow: roughly 21 gigabytes uncompressed.
+#  - objective-3-fast: merge of objective-1-fast & objective-2-fast with low-res videos removed
 #  - none: No video will be downloaded. You have to provide your own.
-DOWNLOAD_OBJECTIVE_TYPE="objective-1-fast"
+DOWNLOAD_OBJECTIVE_TYPE="objective-3-fast"
 
 #*END OF OPTIONS
 
@@ -64,9 +64,17 @@ else
 fi
 
 #Add the selected tar file to the source array.
-if test "$DOWNLOAD_OBJECTIVE_TYPE" != "none"; then
-  source+=("https://media.xiph.org/video/derf/${DOWNLOAD_OBJECTIVE_TYPE}.tar.gz")
+
+if test "$DOWNLOAD_OBJECTIVE_TYPE" == "objective-3-fast"; then
+  source+=("https://media.xiph.org/video/derf/objective-1-fast.tar.gz")
   b2sums+=('SKIP')
+  source+=("https://media.xiph.org/video/derf/objective-2-fast.tar.gz")
+  b2sums+=('SKIP')
+else
+  if test "$DOWNLOAD_OBJECTIVE_TYPE" != "objective-3-fast" && "$DOWNLOAD_OBJECTIVE_TYPE" != "none"; then
+    source+=("https://media.xiph.org/video/derf/${DOWNLOAD_OBJECTIVE_TYPE}.tar.gz")
+    b2sums+=('SKIP')
+  fi
 fi
 
 #Colourful colours
@@ -100,7 +108,7 @@ prepare() {
 
 
 pkgver() {
-  cd "$_repo" || exit 1
+  cd "$_repo" || { echo "pkgver error"; exit 1; }
   git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
