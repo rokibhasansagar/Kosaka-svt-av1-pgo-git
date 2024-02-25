@@ -21,6 +21,7 @@ license=(
 depends=(
   glibc
   libdovi
+  dovi-tool
 )
 makedepends=(
   cmake
