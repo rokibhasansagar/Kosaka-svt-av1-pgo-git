@@ -23,7 +23,6 @@ makedepends=(
   cmake
   git
   nasm
-  yasm
   ninja
   llvm
   llvm-bolt
