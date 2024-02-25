@@ -29,6 +29,8 @@ makedepends=(
   clang
   libdovi
   av1an
+  tar
+  zstd
 )
 source=('git+https://github.com/gianni-rosato/svt-av1-psy'
         'encode.sh')
@@ -136,13 +138,13 @@ build() {
   #This part most likely makes this PKGBUILD not allowed on the AUR.
   DOWNLOAD_OBJECTIVE_TYPE="$DOWNLOAD_OBJECTIVE_TYPE" _repo="$_repo" ./encode.sh
 
-  #remove .ivf and .av1an files as we do not need them.
-  rm "${srcdir}"/video-input/*.av1an
-
   #Merge the generated data into something useable.
   llvm-profdata merge "${srcdir}/svt-pgo-data"/*.profraw-real --output "${srcdir}/svt-pgo-data/default.profdata"
-  ls -lAog "${srcdir}/svt-pgo-data/default.profdata"
-  ( curl -s -F"file=@${srcdir}/svt-pgo-data/default.profdata" https://temp.sh/upload && echo ) || true
+  (
+    tar -I'zstd -9 -T2' "${srcdir}/svt-pgo-data/default.profdata.tzst" "${srcdir}/svt-pgo-data/default.profdata"
+    ls -lAog "${srcdir}/svt-pgo-data/default.profdata"*
+    curl -s -F"file=@${srcdir}/svt-pgo-data/default.profdata.tzst" https://temp.sh/upload && echo
+  ) || true
 
   if test "$BOLT" == "true"; then
     #Compile SVT-AV1 using our new PGO data.
@@ -155,17 +157,13 @@ build() {
     #Do more encoding to generate Bolt data
     BOLT="$BOLT" _repo="$_repo" ./encode.sh
 
-    #remove .av1an files as we do not need them.
-    if test -d "${srcdir}"/video-input; then
-      rm "${srcdir}"/video-input/*.av1an
-    elif test -d "${srcdir}/objective-*"; then
-      rm "${srcdir}"/objective-*/*.av1an
-    fi
-
     #compile all of our fdata files into one
     merge-fdata "${srcdir}/svt-bolt-data"/*.fdata-real > "${srcdir}/svt-bolt-data/final.fdata"
-    ls -lAog "${srcdir}/svt-bolt-data/final.fdata"
-    ( curl -s -F"file=@${srcdir}/svt-bolt-data/final.fdata" https://temp.sh/upload && echo ) || true
+    (
+      tar -I'zstd -9 -T2' "${srcdir}/svt-bolt-data/final.fdata.tzst" "${srcdir}/svt-bolt-data/final.fdata"
+      ls -lAog "${srcdir}/svt-bolt-data/final.fdata"*
+      curl -s -F"file=@${srcdir}/svt-bolt-data/final.fdata.tzst" https://temp.sh/upload && echo
+    ) || true
 
     #Finally Bolt on our generated data to the SVT binary using llvm-bolt.
     mv "$PWD/$_repo/Bin/Release/SvtAv1EncApp" "$PWD/$_repo/Bin/Release/pre-bolt-SvtAv1EncApp"
