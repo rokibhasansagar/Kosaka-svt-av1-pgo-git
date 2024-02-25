@@ -20,7 +20,7 @@ license=(
 )
 depends=(
   glibc
-  libdovi
+  libdovi-git
   dovi-tool
 )
 makedepends=(
