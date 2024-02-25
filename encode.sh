@@ -2,18 +2,18 @@
 
 #Set your encode parameters here.
 #These default settings may not be the best for quality but are good for getting PGO data.
-SVT_AV1AN_COMMAND="--progress 2 --preset 2 --crf 29 --keyint 0 --irefresh-type 1 --film-grain 6 --film-grain-denoise 0 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 9"
+SVT_AV1AN_COMMAND="--progress 2 --preset 2 --crf 30 --keyint 0 --irefresh-type 1 --film-grain 6 --film-grain-denoise 0 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 12"
 
 #Below is not fully needed but it did give a better result having more parameters to use. 
 #Can be disabled by setting the variable to "" or removing altogether
 
-SVT_AV1AN_COMMAND_2="--progress 2 --preset 4 --crf 29 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 9"
+SVT_AV1AN_COMMAND_2="--progress 2 --preset 4 --crf 28 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 4 --qm-max 12"
 
-SVT_AV1AN_COMMAND_3="--progress 2 --preset 6 --crf 29 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 1 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 0 --qm-max 15"
+SVT_AV1AN_COMMAND_3="--progress 2 --preset 5 --crf 29 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 0 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 0 --qm-max 15"
 
-SVT_AV1AN_COMMAND_4="--progress 2 --preset 1 --crf 10 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 1 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 9"
+SVT_AV1AN_COMMAND_4="--progress 2 --preset 1 --crf 12 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 1 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 9"
 
-SVT_AV1AN_COMMAND_5="--progress 2 --preset 1 --crf 10 --keyint 0 --irefresh-type 1 --film-grain 6 --film-grain-denoise 1 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 0 --qm-max 15"
+SVT_AV1AN_COMMAND_5="--progress 2 --preset 1 --crf 12 --keyint 0 --irefresh-type 1 --film-grain 6 --film-grain-denoise 1 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 1 --qm-max 15"
 
 
 #color for the script
