@@ -20,8 +20,6 @@ license=(
 )
 depends=(
   glibc
-  libdovi-git
-  dovi-tool
 )
 makedepends=(
   cmake
@@ -32,6 +30,7 @@ makedepends=(
   llvm-bolt
   clang
   av1an
+  libdovi-git
   tar
   zstd
 )
