@@ -11,9 +11,9 @@ SVT_AV1AN_COMMAND_2="--progress 2 --preset 4 --crf 28 --keyint 0 --irefresh-type
 
 SVT_AV1AN_COMMAND_3="--progress 2 --preset 5 --crf 29 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 0 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 0 --qm-max 15"
 
-SVT_AV1AN_COMMAND_4="--progress 2 --preset 2 --crf 12 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 1 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 9"
+SVT_AV1AN_COMMAND_4="--progress 2 --preset 2 --crf 15 --keyint 0 --irefresh-type 1 --enable-overlays 1 --scd 0 --tune 1 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 5 --qm-max 9"
 
-SVT_AV1AN_COMMAND_5="--progress 2 --preset 1 --crf 12 --keyint 0 --irefresh-type 1 --film-grain 5 --film-grain-denoise 1 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 1 --qm-max 15"
+SVT_AV1AN_COMMAND_5="--progress 2 --preset 2 --crf 12 --keyint 0 --irefresh-type 1 --film-grain 5 --film-grain-denoise 1 --enable-overlays 1 --scd 0 --tune 2 --chroma-u-dc-qindex-offset -1 --chroma-u-ac-qindex-offset -1 --chroma-v-dc-qindex-offset -1 --chroma-v-ac-qindex-offset -1 --enable-tf 0 --enable-qm 1 --qm-min 1 --qm-max 15"
 
 
 #color for the script
@@ -32,7 +32,7 @@ if test "$DOWNLOAD_OBJECTIVE_TYPE" == "none"; then
     fi
 elif test "$DOWNLOAD_OBJECTIVE_TYPE" == "objective-3-fast"; then
     mkdir -p "$PWD"/objective-3-fast
-    rm objective-*-fast/*640x360* objective-*-fast/*360p*
+    rm objective-*-fast/*640x360* objective-*-fast/*360p* objective-*-fast/*240p*
     mv objective-*-fast/*.y4m objective-3-fast/ && rm -rf objective-[12]-fast
 fi
 
@@ -76,6 +76,10 @@ move_fdata() {
     fi
 }
 
+ls "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m} 2>/dev/null | sort >"$PWD"/filelist.txt
+filecount=$(wc -l < "$PWD"/filelist.txt)
+echo "[i] There are total ${filecount} media files present"
+
 for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     echo ""
     basename="${file##*/}"
@@ -84,7 +88,6 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND${nc}"
         av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND " -i "$file" -o "$file.1.av1an"
-
         move_profraw
         move_fdata
     fi
@@ -93,7 +96,6 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_2"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_2${nc}"
         av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_2 " -i "$file" -o "$file.2.av1an"
-        
         move_profraw
         move_fdata
     fi
@@ -102,7 +104,6 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_3"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_3${nc}"
         av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_3 " -i "$file" -o "$file.3.av1an"
-
         move_profraw
         move_fdata
     fi
@@ -111,7 +112,6 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_4"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_4${nc}"
         av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_4 " -i "$file" -o "$file.4.av1an"
-
         move_profraw
         move_fdata
     fi
@@ -120,7 +120,6 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_5"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_5${nc}"
         av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_5 " -i "$file" -o "$file.5.av1an"
-
         move_profraw
         move_fdata
     fi
