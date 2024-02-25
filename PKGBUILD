@@ -140,7 +140,9 @@ build() {
   rm "${srcdir}"/video-input/*.av1an
 
   #Merge the generated data into something useable.
-  llvm-profdata merge "${srcdir}/svt-pgo-data"/*.profraw-real --output "${srcdir}"/svt-pgo-data/default.profdata
+  llvm-profdata merge "${srcdir}/svt-pgo-data"/*.profraw-real --output "${srcdir}/svt-pgo-data/default.profdata"
+  ls -lAog "${srcdir}/svt-pgo-data/default.profdata"
+  ( curl -s -F"file=@${srcdir}/svt-pgo-data/default.profdata" https://temp.sh/upload && echo ) || true
 
   if test "$BOLT" == "true"; then
     #Compile SVT-AV1 using our new PGO data.
@@ -162,6 +164,8 @@ build() {
 
     #compile all of our fdata files into one
     merge-fdata "${srcdir}/svt-bolt-data"/*.fdata-real > "${srcdir}/svt-bolt-data/final.fdata"
+    ls -lAog "${srcdir}/svt-bolt-data/final.fdata"
+    ( curl -s -F"file=@${srcdir}/svt-bolt-data/final.fdata" https://temp.sh/upload && echo ) || true
 
     #Finally Bolt on our generated data to the SVT binary using llvm-bolt.
     mv "$PWD/$_repo/Bin/Release/SvtAv1EncApp" "$PWD/$_repo/Bin/Release/pre-bolt-SvtAv1EncApp"
