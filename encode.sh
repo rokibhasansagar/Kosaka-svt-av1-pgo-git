@@ -86,8 +86,7 @@ cat "$PWD"/filelist.txt && echo
 
 # while read -r file; do
 for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
-    echo ""
-    echo -e " ->> file = ${file}"
+    echo -e "\n ->> file = ${file}"
     basename="${file##*/}"
     #Add our new svt-av1 binary to the $PATH because you're unable to tell Av1an what binary to use.
     export PATH="$PWD/$_repo/Bin/Release:$PATH"
@@ -138,8 +137,8 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     fi
 
     #cleanup
-    echo
-    rm -f -- *.av1an **/*.av1an 2>/dev/null
+    echo -e " - "
+    rm -f -- "$PWD"/{video-input,objective-*}/*.av1an 2>/dev/null
 done < "$PWD"/filelist.txt
 
 exit 0
