@@ -92,6 +92,10 @@ while read -r file; do
     basename="${file##*/}"
     #Add our new svt-av1 binary to the $PATH because you're unable to tell Av1an what binary to use.
     export PATH="$PWD/$_repo/Bin/Release:$PATH"
+
+    ( whereis SvtAv1EncApp 2>/dev/null || true )
+    ( "$PWD/$_repo/Bin/Release/SvtAv1EncApp" --version 2>/dev/null || true )
+    
     if test "$SVT_AV1AN_COMMAND"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND${nc}"
         # shellcheck disable=SC2068
