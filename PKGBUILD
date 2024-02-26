@@ -14,6 +14,7 @@ pkgdesc='Scalable Video Technology AV1 encoder and decoder'
 arch=(x86_64)
 url='https://github.com/gianni-rosato/svt-av1-psy'
 provides=('svt-av1')
+conflicts=('svt-av1')
 license=(
   BSD
   'custom: Alliance for Open Media Patent License 1.0'
@@ -31,8 +32,6 @@ makedepends=(
   clang
   av1an
   libdovi-git
-  tar
-  zstd
 )
 source=('git+https://github.com/gianni-rosato/svt-av1-psy'
         'encode.sh')
