@@ -95,7 +95,6 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND${nc}"
         # shellcheck disable=SC2068
-        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an --version
         echo -e "av1an -e svt-av1 ${av1an_opts[@]} -v \" $SVT_AV1AN_COMMAND \" --scenes $file.scenes.json -i $file -o $file.1.av1an"
         LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND " --scenes "$file.scenes.json" -i "$file" -o "$file.1.av1an"
         move_profraw
