@@ -81,7 +81,7 @@ move_fdata() {
 
 ls "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m} 2>/dev/null | sort -u >"$PWD"/filelist.txt
 filecount=$(wc -l < "$PWD"/filelist.txt)
-echo "[i] There are total ${filecount} media files present"
+echo -e "\n[i] There are total ${filecount} media files present"
 cat "$PWD"/filelist.txt && echo
 
 while read -r file; do
