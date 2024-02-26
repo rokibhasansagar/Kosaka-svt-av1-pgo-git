@@ -138,6 +138,7 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     fi
 
     #cleanup
+    echo
     rm -f -- *.av1an **/*.av1an 2>/dev/null
 done < "$PWD"/filelist.txt
 
