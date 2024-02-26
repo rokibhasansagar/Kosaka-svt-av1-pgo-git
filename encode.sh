@@ -96,8 +96,8 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND${nc}"
         # shellcheck disable=SC2068
         LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an --version
-        echo -e "av1an -e svt-av1 ${av1an_opts[@]} -v \" $SVT_AV1AN_COMMAND \" -i $file -o $file.1.av1an"
-        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND " -i "$file" -o "$file.1.av1an"
+        echo -e "av1an -e svt-av1 ${av1an_opts[@]} -v \" $SVT_AV1AN_COMMAND \" --scenes $file.scenes.json -i $file -o $file.1.av1an"
+        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND " --scenes "$file.scenes.json" -i "$file" -o "$file.1.av1an"
         move_profraw
         move_fdata
     fi
@@ -106,7 +106,7 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_2"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_2${nc}"
         # shellcheck disable=SC2068
-        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_2 " -i "$file" -o "$file.2.av1an"
+        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_2 " --scenes "$file.scenes.json" -i "$file" -o "$file.2.av1an"
         move_profraw
         move_fdata
     fi
@@ -115,7 +115,7 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_3"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_3${nc}"
         # shellcheck disable=SC2068
-        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_3 " -i "$file" -o "$file.3.av1an"
+        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_3 " --scenes "$file.scenes.json" -i "$file" -o "$file.3.av1an"
         move_profraw
         move_fdata
     fi
@@ -124,7 +124,7 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_4"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_4${nc}"
         # shellcheck disable=SC2068
-        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_4 " -i "$file" -o "$file.4.av1an"
+        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_4 " --scenes "$file.scenes.json" -i "$file" -o "$file.4.av1an"
         move_profraw
         move_fdata
     fi
@@ -133,7 +133,7 @@ for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     if test "$SVT_AV1AN_COMMAND_5"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_5${nc}"
         # shellcheck disable=SC2068
-        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_5 " -i "$file" -o "$file.5.av1an"
+        LD_LIBRARY_PATH="$PWD/$_repo/Bin/Release:$LD_LIBRARY_PATH" av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_5 " --scenes "$file.scenes.json" -i "$file" -o "$file.5.av1an"
         move_profraw
         move_fdata
     fi
