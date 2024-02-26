@@ -32,9 +32,9 @@ if test "$DOWNLOAD_OBJECTIVE_TYPE" == "none"; then
     fi
 elif test "$DOWNLOAD_OBJECTIVE_TYPE" == "objective-3-fast"; then
     mkdir -p "$PWD"/objective-3-fast
-    rm objective-*/*640x360* objective-*/*360p* objective-*/*240p*
-    mv -f objective-*/*.y4m objective-3-fast/
-    rm -rf "$PWD"/objective-1-fast "$PWD"/objective-2-fast
+    rm -f objective-*/*640x360* objective-*/*360p* objective-*/*240p*
+    mv -f objective-*/*.y4m objective-3-fast/ 2>/dev/null
+    rm -rf -- "$PWD"/objective-1-fast "$PWD"/objective-2-fast
 fi
 
 export av1an_opts=(
@@ -134,7 +134,7 @@ while read -r file; do
     fi
 
     #cleanup
-    rm *.av1an
+    rm -f -- *.av1an **/*.av1an 2>/dev/null
 done < "$PWD"/filelist.txt
 
 exit 0
