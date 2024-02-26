@@ -84,11 +84,10 @@ filecount=$(wc -l < "$PWD"/filelist.txt)
 echo -e "\n[i] There are total ${filecount} media files present"
 cat "$PWD"/filelist.txt && echo
 
-set -xv
-
-while read -r file; do
-# for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
+# while read -r file; do
+for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     echo ""
+    echo -e " ->> file = ${file}"
     basename="${file##*/}"
     #Add our new svt-av1 binary to the $PATH because you're unable to tell Av1an what binary to use.
     export PATH="$PWD/$_repo/Bin/Release:$PATH"
@@ -99,7 +98,9 @@ while read -r file; do
     if test "$SVT_AV1AN_COMMAND"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND${nc}"
         # shellcheck disable=SC2068
-        av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND " -i "$file" -o "$file.1.av1an"
+        set -xv
+        av1an -verbose -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND " -i "$file" -o "$file.1.av1an"
+        set +xv
         move_profraw
         move_fdata
     fi
@@ -108,7 +109,7 @@ while read -r file; do
     if test "$SVT_AV1AN_COMMAND_2"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_2${nc}"
         # shellcheck disable=SC2068
-        av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_2 " -i "$file" -o "$file.2.av1an"
+        av1an -verbose -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_2 " -i "$file" -o "$file.2.av1an"
         move_profraw
         move_fdata
     fi
@@ -117,7 +118,7 @@ while read -r file; do
     if test "$SVT_AV1AN_COMMAND_3"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_3${nc}"
         # shellcheck disable=SC2068
-        av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_3 " -i "$file" -o "$file.3.av1an"
+        av1an -verbose -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_3 " -i "$file" -o "$file.3.av1an"
         move_profraw
         move_fdata
     fi
@@ -126,7 +127,7 @@ while read -r file; do
     if test "$SVT_AV1AN_COMMAND_4"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_4${nc}"
         # shellcheck disable=SC2068
-        av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_4 " -i "$file" -o "$file.4.av1an"
+        av1an -verbose -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_4 " -i "$file" -o "$file.4.av1an"
         move_profraw
         move_fdata
     fi
@@ -135,7 +136,7 @@ while read -r file; do
     if test "$SVT_AV1AN_COMMAND_5"; then
         echo -e "${green}Encoding:${nc}${white} $basename${nc} with ${white}SVT_AV1AN_COMMAND_5${nc}"
         # shellcheck disable=SC2068
-        av1an -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_5 " -i "$file" -o "$file.5.av1an"
+        av1an -verbose -e svt-av1 ${av1an_opts[@]} -v " $SVT_AV1AN_COMMAND_5 " -i "$file" -o "$file.5.av1an"
         move_profraw
         move_fdata
     fi
@@ -143,8 +144,6 @@ while read -r file; do
     #cleanup
     rm -f -- *.av1an **/*.av1an 2>/dev/null
 done < "$PWD"/filelist.txt
-
-set +xv
 
 exit 0
 }
