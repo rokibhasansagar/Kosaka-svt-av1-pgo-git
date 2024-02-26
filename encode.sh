@@ -78,12 +78,12 @@ move_fdata() {
     fi
 }
 
-ls "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m} 2>/dev/null | sort >"$PWD"/filelist.txt
+ls "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m} 2>/dev/null | sort -u >"$PWD"/filelist.txt
 filecount=$(wc -l < "$PWD"/filelist.txt)
 echo "[i] There are total ${filecount} media files present"
 cat "$PWD"/filelist.txt && echo
 
-cat "$PWD"/filelist.txt | while read -r file; do
+while read -r file; do
 # for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     echo ""
     basename="${file##*/}"
@@ -130,7 +130,7 @@ cat "$PWD"/filelist.txt | while read -r file; do
 
     #cleanup
     rm *.av1an
-done
+done < "$PWD"/filelist.txt
 
 exit 0
 }
