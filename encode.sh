@@ -84,6 +84,8 @@ filecount=$(wc -l < "$PWD"/filelist.txt)
 echo -e "\n[i] There are total ${filecount} media files present"
 cat "$PWD"/filelist.txt && echo
 
+set -xv
+
 while read -r file; do
 # for file in "$PWD"/{video-input,objective-*}/*.{mkv,mp4,y4m}; do
     echo ""
@@ -137,6 +139,8 @@ while read -r file; do
     #cleanup
     rm -f -- *.av1an **/*.av1an 2>/dev/null
 done < "$PWD"/filelist.txt
+
+set +xv
 
 exit 0
 }
