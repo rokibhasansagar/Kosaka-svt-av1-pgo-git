@@ -33,8 +33,8 @@ if test "$DOWNLOAD_OBJECTIVE_TYPE" == "none"; then
 elif test "$DOWNLOAD_OBJECTIVE_TYPE" == "objective-3-fast"; then
     mkdir -p "$PWD"/objective-3-fast
     rm -f objective-*/*640x360* objective-*/*360p* objective-*/*240p*
-    mv -f objective-1/*.y4m objective-3-fast/ 2>/dev/null
-    mv -f objective-2/*.y4m objective-3-fast/ 2>/dev/null
+    mv -f objective-1-fast/*.y4m objective-3-fast/ 2>/dev/null
+    mv -f objective-2-fast/*.y4m objective-3-fast/ 2>/dev/null
     rm -rf -- "$PWD"/objective-1-fast "$PWD"/objective-2-fast
 fi
 
